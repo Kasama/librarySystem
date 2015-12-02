@@ -1,0 +1,14 @@
+@startuml
+
+skinparam monochrome true
+skinparam shadowing false
+hide stereotype
+
+node "<u>:Usuário</u>" as n1
+component "<u>:Controlador de</u>\n<u> Usuário</u>" as cont
+
+System -d-> cont :Usr:=buscarUsuário(codigo_RG_CIC)
+
+cont -> n1 :1.Usr:=consultaUsuário(codigo_RG_CIC)
+
+@enduml

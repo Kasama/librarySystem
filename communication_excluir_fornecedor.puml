@@ -1,0 +1,16 @@
+@startuml
+
+skinparam monochrome true
+skinparam shadowing false
+hide stereotype
+
+node "<u>:Aquisição</u>" as n1
+node "<u>:Fornecedor</u>" as n2
+component "<u>:Controlador de</u>\n<u> Fornecedores</u>" as cont
+
+System -d-> cont :excluirFornecedor(fornecedor)
+
+cont -> n1 :"1.a:=consultaAquisição(codigo_fornecedor)"
+cont -d-> n2 :"2.[a == null] excluir(fornecedor)"
+
+@enduml

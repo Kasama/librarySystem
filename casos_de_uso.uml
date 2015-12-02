@@ -1,0 +1,115 @@
+@startuml
+left to right direction
+
+actor Funcionário as F
+actor Supervisor as S
+actor "Usuário da Biblioteca" as U
+
+
+usecase (Gerenciar Livros) as GLivro
+usecase (Gerenciar Reservas) as GReserva
+usecase (Gerenciar Empréstimos) as GEmprestimo
+usecase (Gerenciar Aquisição) as GAquisicao
+usecase (Gerenciar Doação) as GDoacao
+usecase (Gerenciar Doador) as GDoador
+usecase (Gerenciar Funcionário) as GFuncionario
+usecase (Gerenciar Usuário) as GUsuario
+usecase (Gerenciar Fornecedor) as GFornecedor
+
+usecase (Imprimir) as Print
+usecase (Emitir Relatórios) as ERel
+
+
+F <|- S
+F -- U
+
+U -- (Consultar Livro)
+
+F -- (GLivro)
+  (GLivro) ..> (Incluir Livro) :include
+  (GLivro) ..> (Excluir Livro) :include
+  (GLivro) ..> (Alterar Info do Livro) :include
+  (GLivro) ..> (Consultar Livro) :include
+    (Excluir Livro) ..> (Consultar Livro) :include
+    (Alterar Info do Livro) ..> (Consultar Livro) :include
+    (Consultar Livro) ..> Print :extends
+
+F -- (GReserva)
+  (GReserva) ..> (Incluir Reserva) :include
+  (GReserva) ..> (Excluir Reserva) :include
+  (GReserva) ..> (Alterar Reserva) :include
+  (GReserva) ..> (Consultar Reserva) :include
+    (Excluir Reserva) ..> (Consultar Reserva) :include
+    (Alterar Reserva) ..> (Consultar Reserva) :include
+    (Consultar Reserva) ..> Print :extends
+
+F -- (GEmprestimo)
+  (GEmprestimo) ..> (Incluir Empréstimo) :include
+  (GEmprestimo) ..> (Excluir Empréstimo) :include
+  (GEmprestimo) ..> (Alterar Empréstimo) :include
+  (GEmprestimo) ..> (Consultar Empréstimo) :include
+    (Excluir Empréstimo) ..> (Consultar Empréstimo) :include
+    (Alterar Empréstimo) ..> (Consultar Empréstimo) :include
+    (Consultar Empréstimo) ..> Print :extends
+
+S -- (GAquisicao)
+  (GAquisicao) ..> (Incluir Aquisição) :include
+  (GAquisicao) ..> (Excluir Aquisição) :include
+  (GAquisicao) ..> (Alterar Aquisição) :include
+  (GAquisicao) ..> (Consultar Aquisição) :include
+    (Excluir Aquisição) ..> (Consultar Aquisição) :include
+    (Alterar Aquisição) ..> (Consultar Aquisição) :include
+    (Consultar Aquisição) ..> Print :extends
+
+S -- (GDoacao)
+  (GDoacao) ..> (Incluir Doação) :include
+  (GDoacao) ..> (Excluir Doação) :include
+  (GDoacao) ..> (Alterar Doação) :include
+  (GDoacao) ..> (Consultar Doação) :include
+    (Excluir Doação) ..> (Consultar Doação) :include
+    (Alterar Doação) ..> (Consultar Doação) :include
+    (Consultar Doação) ..> Print :extends
+
+S -- (GDoador)
+  (GDoador) ..> (Incluir Doador) :include
+  (GDoador) ..> (Excluir Doador) :include
+  (GDoador) ..> (Alterar Doador) :include
+  (GDoador) ..> (Consultar Doador) :include
+    (Excluir Doador) ..> (Consultar Doador) :include
+    (Alterar Doador) ..> (Consultar Doador) :include
+    (Consultar Doador) ..> Print :extends
+
+S -- (GFuncionario)
+  (GFuncionario) ..> (Incluir Funcionário) :include
+  (GFuncionario) ..> (Excluir Funcionário) :include
+  (GFuncionario) ..> (Alterar Funcionário) :include
+  (GFuncionario) ..> (Consultar Funcionário) :include
+    (Excluir Funcionário) ..> (Consultar Funcionário) :include
+    (Alterar Funcionário) ..> (Consultar Funcionário) :include
+    (Consultar Funcionário) ..> Print :extends
+
+F -- (GUsuario)
+  (GUsuario) ..> (Incluir Usuário) :include
+  (GUsuario) ..> (Excluir Usuário) :include
+  (GUsuario) ..> (Alterar Usuário) :include
+  (GUsuario) ..> (Consultar Usuário) :include
+    (Excluir Usuário) ..> (Consultar Usuário) :include
+    (Alterar Usuário) ..> (Consultar Usuário) :include
+    (Consultar Usuário) ..> Print :extends
+
+F -- (GFornecedor)
+  (GFornecedor) ..> (Incluir Fornecedor) :include
+  (GFornecedor) ..> (Excluir Fornecedor) :include
+  (GFornecedor) ..> (Alterar Fornecedor) :include
+  (GFornecedor) ..> (Consultar Fornecedor) :include
+    (Excluir Fornecedor) ..> (Consultar Fornecedor) :include
+    (Alterar Fornecedor) ..> (Consultar Fornecedor) :include
+    (Consultar Fornecedor) ..> Print :extends
+
+F -- (ERel)
+  (ERel) ..> (Emitir relatórios de empréstimos pendentes) :include
+  (ERel) ..> (Emitir reltórios de reservas pendentes) :include
+  (ERel) ..> (Emitir relatórios de livros emprestados) :include
+  (ERel) ..> (Emitir relatório de uma tableda do sistema) :include
+  (ERel) ..> Print :extends
+@enduml

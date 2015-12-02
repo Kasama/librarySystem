@@ -1,0 +1,22 @@
+@startuml
+
+title:Diagrama de Sequência do Sistema:\nEmitir relatórios de empréstimos pendentes
+
+skinparam monochrome true
+
+Actor Funcionário as func
+participant Sistema
+
+func -> Sistema: emitirEmprestimosDeLivrosPendentes()
+activate Sistema
+activate func
+
+alt Existem livros emprestados no momento
+  Sistema --> func: Relatorio
+else Não existem livros empretados no momento
+  Sistema --> func: RelatorioEmBranco
+end
+deactivate func
+deactivate Sistema
+
+@enduml

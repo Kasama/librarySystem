@@ -1,0 +1,48 @@
+@startuml
+
+title:Diagrama de Sequência do Sistema:\nAlterar Funcionário
+
+skinparam monochrome true
+
+actor Supervisor
+participant Sistema
+note right of Supervisor
+	A qualquer momento
+	o Supervisor pode
+	cancelar a operação,
+	retornando.
+end note
+
+loop Enquanto não encontrar Funcionário
+	Supervisor -> Sistema: buscarFuncionario(codigo_RG_CIC)
+	activate Supervisor
+	activate Sistema
+	alt Funcionário encontrado
+		Sistema --> Supervisor: Funcionário
+	else Funcionário não encontrado
+		Sistema --> Supervisor: Erro
+	end
+	deactivate Supervisor
+	deactivate Sistema
+end loop
+
+loop Enquanto dados incorretos
+	Supervisor -> Sistema: alterarDadosFuncionario(\n Funcionário, nome, sobrenome,\n RG, CIC, salario, endereco, sexo,\n formacao_profissional, codigo_supervisor\n)
+	note left of Sistema
+		Qualquer dos parametros
+		de alterarDadosFuncionario
+		pode ser deixado em branco
+	end note
+	activate Sistema
+	activate Supervisor
+
+	alt Dados inseridos corretamente
+		Sistema --> Supervisor: DadosAlteradosSucesso
+	else Dados com erro
+		Sistema --> Supervisor: DadosIncorretos
+	end
+end
+deactivate Supervisor
+deactivate Sistema
+
+@enduml

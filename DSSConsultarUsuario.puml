@@ -1,0 +1,42 @@
+@startuml
+
+title:Diagrama de Sequência do Sistema:\nConsultar Usuário
+
+skinparam monochrome true
+
+Actor Funcionário as func
+participant Sistema
+
+note right of func
+	A qualquer momento
+	o Funcionário pode
+	cancelar a operação,
+	retornando.
+end note
+
+activate Sistema
+activate func
+loop Enquanto não encontrar Usuário
+	func -> Sistema: buscarUsuario(codigo_RG_CIC)
+
+	alt Usuário encontrado
+	  Sistema --> func: Usuário
+	else Usuário não encontrado
+	  Sistema --> func: Erro
+	end
+end loop
+deactivate func
+deactivate Sistema
+
+alt Apenas exibir as informações na tela
+	func -> Sistema : imprimirUsuárioTela(Usuário)
+	activate func
+	activate Sistema
+else Imprimir as informações na impressora
+	func -> Sistema : imprimirUsuárioImpressora(Usuário)
+end alt
+Sistema --> func : Impresso
+deactivate func
+deactivate Sistema
+
+@enduml

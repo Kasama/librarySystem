@@ -1,0 +1,31 @@
+@startuml
+
+title:Diagrama de Sequência do Sistema:\nIncluir Livro
+
+skinparam monochrome true
+
+actor Funcionário as func
+participant Sistema
+
+note right of func
+	A qualquer momento
+	o Funcionário pode
+	cancelar a operação,
+	retornando.
+end note
+
+func -> Sistema: InserirLivro(\n titulo, autor, numero_registro_livro, editora,\n volume, numero_paginas, numero_edicao,\n ano, local_de_publicacao\n)
+activate Sistema
+activate func
+
+alt Funcionário insere dados de maneira correta
+	Sistema --> func: LivroInserido
+else Livro já está cadastrado
+	Sistema --> func: LivroJaCadastrado
+else Funcionário deixa de preencher um ou mais campos obrigatorios
+	Sistema --> func: Erro
+end
+deactivate func
+deactivate Sistema
+
+@enduml

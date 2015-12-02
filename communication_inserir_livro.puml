@@ -1,0 +1,18 @@
+@startuml
+
+skinparam monochrome true
+skinparam shadowing false
+
+node "<u>:Acervo</u>" as a
+component "<u>:Controlador</u>\n<u>de Livro</u>" as c
+component "<u>:Gerenciador</u>\n<u>de Livro</u>" as g
+component "<u>:Livro</u>" as l
+interface System as s
+
+
+s -d-> c : inserirLivro(Dados)
+c -r-> g : 1.cadastrarLivro(Dados)
+g -r-> l : 2.Livro:=criar(Dados)
+g -d-> a : 3.adicionarLivro(Livro)
+
+@enduml

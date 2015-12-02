@@ -1,0 +1,53 @@
+Inserir Livro:
+Pré Condição:
+	astah
+	Existe uma Aquisição de um Fornecedor ou Doação de Doador referente ao livro `l` que se quer inserir
+Pós Condição:
+	É criado um Livro `l`.
+	`l.titulo = titulo`
+	`l.autor = autor`
+	`l.numero_registro_livro = numero_registro_livro`
+	`l.editora = editora`
+	`l.numero_paginas = numero_paginas`
+	`l.numero_edicao = numero_edicao`
+	`l.anos = anos`
+	`l.codigo_livro = codigo_livro`
+	Caso não exista um Autor com nome `l.autor` no sistema, é criado o Autor `a` e `a.nome = l.autor`.
+	Caso não exista uma Editora com nome `l.editora` no sistema, é criada a Editora `e` e `e.nome = l.editora`.
+	Caso não exista um Local_de_publicacao com nome `l.local_de_publicacao` no sistema, é criado o Local_de_publicacao `loc` e `loc.nome = l.editora`.
+
+=======================================================================================
+
+Alterar Dados Funcionario:
+Pré Condição:
+	Existe um Funcionario `func` e deseja-se alterar alguma(s) informações dele. Essas informações são conhecidas.
+Pós Condição:
+se os dados são validos:
+`func.nome = nome`
+`func.sobrenome = sobrenome`
+`func.RG = RG`
+`func.CIC = CIC`
+`func.salario = salario`
+`func.endereco = endereco`
+`func.sexo = sexo`
+`func.formacao_profissional = formacao_profissional`
+`func.codigo_supervisor = codigo_supervisor`
+se dados incorretos:
+Nenhuma alteração é salva no `func` e é retornado um erro, mostrando que algum dado estava incorreto.
+
+=======================================================================================
+
+Buscar Usuário:
+Pré-Condição:
+
+Pós-Condição:
+	É retornado um usuário `u` tal que `u.codigo_usuario == codigo_RG_CIC` ou `u.RG == codigo_RG_CIC` ou `u.CIC == codigo_RG_CIC` ou um erro, caso nenhum usuário seja encontrado.
+
+=======================================================================================
+
+Excluir Fornecedor:
+Pré-Condição:
+	Existe um Fornecedor `f` que se quer excluir.
+Pós-Condição:
+	O Fornecedor `f` é excluido caso `f.aquisicoes.length == 0`.
+ 

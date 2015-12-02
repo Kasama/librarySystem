@@ -1,0 +1,14 @@
+@startuml
+
+skinparam monochrome true
+skinparam shadowing false
+hide stereotype
+
+node "func<u>:Funcionário</u>" as n1
+component "<u>:Controlador de</u>\n<u> Funcionário</u>" as cont
+
+System -d-> cont :alterarDadosFuncionário(func, Dados)
+
+cont -> n1 :1.alterarDados(Dados)
+
+@enduml

@@ -1,0 +1,40 @@
+@startuml
+
+skinparam monochrome true
+
+title: Diagrama de Sequência do Sistema\nExcluir Fornecedor
+actor Supervisor as sup
+participant Sistema as sys
+
+note right sup
+	A qualquer momento
+	o Supervisor pode
+	cancelar a operação,
+	retornando.
+end note
+
+activate sup
+activate sys
+loop Enquanto não encontrar um Fornecedor
+sup -> sys : buscarFornecedor(codigo_razaoSocial)
+alt Fornecedor Encontrado
+    sys --> sup : Fornecedor
+else Fornecedor Não Encontrado
+    sys --> sup : Erro
+end
+end loop
+deactivate sup
+deactivate sys
+
+sup -> sys : excluirFornecedor(Fornecedor)
+activate sup
+activate sys
+alt Fornecedor não é referenciado por nenhuma aquisição
+	sys --> sup : Fornecedor excluído com sucesso
+else Fornecedor é referenciado por alguma aquisição
+	sys --> sup : Fornecedor não excluído
+end alt
+deactivate sup
+deactivate sys
+
+@enduml

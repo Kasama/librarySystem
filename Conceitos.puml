@@ -1,0 +1,175 @@
+@startuml
+
+title Modelo Conceitual
+
+skinparam monochrome true
+
+	object Aquisicao{
+		preco
+		data_hora
+	}
+	Aquisicao "1" -- "1" Livro : é de >
+	Aquisicao "0..n" -u- "1" Fornecedor : é de >
+
+	object Autor{
+		nome
+	}
+	Autor "1" -u- "1..n" Livro : publica >
+
+	object Devolucao{
+		data_hora_atual
+		data_hora_emprestimo
+		multa
+		numero_renovacoes
+	}
+	Devolucao "0..n" -- "0..n" Livro : é de >
+	Devolucao "0..n" -- "0..n" Usuario : é de >
+	Devolucao "0..n" -- "0..n" Funcionario : é cadastrada por >
+
+	object Doacao{
+		numero_registro_livro
+		data_hora
+		estado
+	}
+	Doacao "1" -u- "1..n" Doador : é de >
+	Doacao "1" -- "1" Livro : é de >
+
+	object Doador{
+		codigo_doador
+		RG
+		CIC
+		nome
+		endereco
+		idade
+		sexo
+		telefone
+		profissao
+	}
+
+	object Editora{
+		nome
+	}
+	Editora "1" -u- "1..n" Livro : publica >
+
+	object Emprestimo{
+		data_hora_emprestimo
+		data_hora_devolucao
+		status
+		renovacao
+	}
+	Emprestimo "0..n" -- "0..n" Livro : é de >
+	Emprestimo "0..n" -- "0..n" Usuario : é de >
+	Emprestimo "0..n" -u- "0..n" Funcionario : é cadastrada por >
+
+	object Fornecedor{
+		nome
+		razao_social
+		endereco
+		telefone
+		nome_representante
+		telefone_representante
+		codigo_fornecedor
+	}
+
+	object Funcionario{
+		nome
+		sobrenome
+		RG
+		CIC
+		salario
+		endereco
+		sexo
+		formacao_profissional
+		codigo_supervisor
+		codigo_funcionario
+	}
+	Funcionario "0..n" -- "1" Supervisor : < cadastra
+
+	object Impressora{
+
+	}
+	'Impressora "1" -- "0..n" Relatorio : imprime >
+	'Impressora "1" -- "0..n" Aquisicao : imprime consulta >
+	'Impressora "1" -- "0..n" Devolucao : imprime consulta >
+	'Impressora "1" -- "0..n" Doacao : imprime consulta >
+	'Impressora "1" -- "0..n" Doador : imprime consulta >
+	'Impressora "1" -- "0..n" Emprestimo : imprime consulta >
+	'Impressora "1" -- "0..n" Fornecedor : imprime consulta >
+	'Impressora "1" -- "0..n" Funcionario : imprime consulta >
+	'Impressora "1" -- "0..n" Reserva : imprime consulta >
+	'Impressora "1" -- "0..n" Usuario : imprime consulta >
+
+	object Livro{
+		titulo
+		numero_registro_livro
+		volume
+		numero_paginas
+		numero_edicao
+		ano
+		codigo_livro
+	}
+	Livro "1..n" -- "1" Local_de_publicacao : é publicado em >
+
+	object Local_de_publicacao{
+		endereco
+	}
+
+	object Relatorio{
+		informacoes
+	}
+	Relatorio "0..n" -- "0..n" Livro
+	Relatorio "0..n" -- "0..n" Usuario
+	Relatorio "0..n" -- "0..n" Emprestimo
+	Relatorio "0..n" -- "0..n" Reserva
+
+	object Reserva{
+		data_hora_reserva
+		status
+		prazo
+	}
+	Reserva "0..n" -- "1" Livro : < é reservado
+	Reserva "0..n" -- "1" Usuario : < reserva
+	Reserva "0..n" -- "1" Funcionario : < cadastra reserva
+
+	object Supervisor{
+
+	}
+	Funcionario <|-- Supervisor
+
+	object Tela{
+
+	}
+	'Tela "1" -- "0..n" Relatorio : exibe >
+	'Tela "1" -- "0..n" Aquisicao : exibe consulta >
+	'Tela "1" -- "0..n" Devolucao : exibe consulta >
+	'Tela "1" -- "0..n" Doacao : exibe consulta >
+	'Tela "1" -- "0..n" Doador : exibe consulta >
+	'Tela "1" -- "0..n" Emprestimo : exibe consulta >
+	'Tela "1" -- "0..n" Fornecedor : exibe consulta >
+	'Tela "1" -- "0..n" Funcionario : exibe consulta >
+	'Tela "1" -- "0..n" Reserva : exibe consulta >
+	'Tela "1" -- "0..n" Usuario : exibe consulta >
+
+	object Terminal{
+		codigo
+	}
+	Terminal "1" -- "0..n" Usuario : é acessado por >
+
+	object Usuario{
+		nome
+		sobrenome
+		RC
+		CIC
+		telefone
+		endereco
+		sexo
+		profissao
+		codigo_usuario
+	}
+	Usuario "1" -- "0..n" Livro : consulta >
+
+	note "Por simplificação não\n exibimos as ligações\n com a tela e impressora\nneste diagrama.\nVeja o Diagrama auxiliar" as N1
+	Tela -u- N1
+	Impressora -u- N1
+
+@enduml

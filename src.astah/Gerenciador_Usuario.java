@@ -1,6 +1,6 @@
 public class Gerenciador_Usuario {
 
-	public Usuario buscarUsuario(int codigo_RG_CIC) {
+	public Usuario buscarUsuario(String codigo_RG_CIC) {
 		return null;
 	}
 
